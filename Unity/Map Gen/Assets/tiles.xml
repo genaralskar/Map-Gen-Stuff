@@ -1,0 +1,39 @@
+<set>
+  <tiles>
+<tile name="Prefabs/Dunjun Wall/Dunjun Floor Rot" symmetry="X" weight="1.0"/>
+<tile name="Prefabs/Dunjun Wall/Dunjun Wall Rot" symmetry="X" weight="1.0"/>
+<tile name="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot" symmetry="X" weight="1.0"/>
+<tile name="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot" symmetry="X" weight="1.0"/>
+	</tiles>
+<neighbors>  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot 1" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot 2" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 2"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 0" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 1" right="Prefabs/Dunjun Wall/Dunjun Floor Rot 1"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 0" right="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot 1" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 1" right="Prefabs/Dunjun Wall/Dunjun Floor Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 2" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 2"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Floor Rot 0" right="Prefabs/Dunjun Wall/Dunjun Floor Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Floor Rot 1" right="Prefabs/Dunjun Wall/Dunjun Floor Rot 1"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Floor Rot 0" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 3"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 0" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 2" right="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 2"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot 1" right="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 1"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 1" right="Prefabs/Dunjun Wall/Dunjun Floor Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 2" right="Prefabs/Dunjun Wall/Dunjun Floor Rot 1"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 0" right="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 1"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 2" right="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot 3"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Floor Rot 1" right="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 3"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Floor Rot 0" right="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 0" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 1" right="Prefabs/Dunjun Wall/Dunjun Floor Rot 1"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot 2" right="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 2"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 2" right="Prefabs/Dunjun Wall/Dunjun Floor Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Inner Corner Rot 3" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 2"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Floor Rot 1" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 3"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 0" right="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot 0"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot 2" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 2"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 2" right="Prefabs/Dunjun Wall/Dunjun Wall Rot 2"/>
+  <neighbor left="Prefabs/Dunjun Wall/Dunjun Wall Rot 2" right="Prefabs/Dunjun Wall/Dunjun Wall Corner Rot 3"/>
+	</neighbors>
+</set>

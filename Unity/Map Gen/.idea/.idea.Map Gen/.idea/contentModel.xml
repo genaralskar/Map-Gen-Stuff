@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\genar\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_Map Gen.-1658247934.00" t="ExcludeRecursive" />
+    <e p="E:\GIT\Map Gen Stuff\Unity\Map Gen" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="demo.xml" t="Include" />
+        <e p="Scripts" t="Include">
+          <e p="SimpleCameraController.cs" t="Include" />
+        </e>
+        <e p="tiles.xml" t="Include" />
+        <e p="TutorialInfo" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="Editor" t="Include">
+              <e p="ReadmeEditor.cs" t="Include" />
+            </e>
+            <e p="Readme.cs" t="Include" />
+          </e>
+        </e>
+        <e p="unity-wave-function-collapse" t="Include">
+          <e p="impl" t="Include">
+            <e p="Model.cs" t="Include" />
+            <e p="OverlappingModel.cs" t="Include" />
+            <e p="SimpleTiledModel.cs" t="Include" />
+            <e p="Stuff.cs" t="Include" />
+            <e p="Tuple.cs" t="Include" />
+            <e p="Tuple2.cs" t="Include" />
+            <e p="Tuple3.cs" t="Include" />
+            <e p="Tuple4.cs" t="Include" />
+          </e>
+          <e p="LICENSE.txt" t="Include" />
+          <e p="OverlapWFC.cs" t="Include" />
+          <e p="SimpleTiledWFC.cs" t="Include" />
+          <e p="TilePainter.cs" t="Include" />
+          <e p="Training.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="Map Gen.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
