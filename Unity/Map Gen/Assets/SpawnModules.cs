@@ -12,6 +12,9 @@ public class SpawnModules : MonoBehaviour
     public int maxIterations = 10;
     public int maxWidth = 10;
     public int maxHeight = 10;
+    public int seed = 0;
+
+    public bool[,] takenSpots;
 
     
     public List<GameObject> currentModules;
@@ -25,6 +28,7 @@ public class SpawnModules : MonoBehaviour
     //maybe force an update call?
     public IEnumerator Spawn()
     {
+        Random.InitState(seed);
         for (int i = 0; i < maxIterations; i++)
         {
             //OpenNodeCheck();
