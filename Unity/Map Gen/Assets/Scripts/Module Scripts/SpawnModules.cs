@@ -2,47 +2,61 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
+/// <summary>
+/// Used to spawn rooms (modules) at connecting node points
+/// </summary>
+
 public class SpawnModules : MonoBehaviour
 {
+    public GameObject doorPrefab;
+    public Transform roomContainer;
     public List<GameObject> spawnableModules;
     public int maxIterations = 10;
     public int maxWidth = 10;
     public int maxHeight = 10;
     public int seed = 0;
+    
+    [HideInInspector]
+    public int internalSeed;
 
     public bool[,] takenSpots;
 
-    
+    public LayerMask roomLayer;
     public List<GameObject> currentModules;
-    
     public List<Transform> currentNodes;
+
+    public List<Transform> doorNodes;
+
     
-    
-    //THIS NEEDS TO BE MOVED INTO A COROUTINE BECAUSE SPAWNING, MOVING, AND COLLISION CHECKS HAPPEN IN A FRAME
-    //BUT THE PHYSICS CHECK DON'T WORK PROPERLY BEACUSE THEY USE FIXED UPDATE, SO THE COLLISION STUFF DOESN'T UPDATE
-    //AS FAST AS THE POSITION STUFF DOES
-    //maybe force an update call?
     public IEnumerator Spawn()
     {
-        Random.InitState(seed);
-        for (int i = 0; i < maxIterations; i++)
+        Clear();
+        
+        //set random seed
+        internalSeed = seed != 0 ? seed : Random.Range(0, 1000000);
+        Random.InitState(internalSeed);
+        
+        
+        
+        for (int i = 0; i < maxIterations;)
         {
             //OpenNodeCheck();
             
             //choose a random modules
             int randMod = Random.Range(0, spawnableModules.Count);
-            GameObject newMod = Instantiate(spawnableModules[randMod]);
+            GameObject newMod = Instantiate(spawnableModules[randMod], roomContainer);
             newMod.name = ("Room " + currentModules.Count);
-            Nodes newNodes = newMod.GetComponent<Nodes>();
+            ModuleNodes newModuleNodes = newMod.GetComponent<ModuleNodes>();
             
             if (currentModules.Count == 0)
             {
                 currentModules.Add(newMod);
-                foreach (var node in newNodes.nodes)
+                foreach (var node in newModuleNodes.Nodes)
                 {
                     currentNodes.Add(node);
                 }
@@ -63,34 +77,28 @@ public class SpawnModules : MonoBehaviour
                 
                 
                 //choose random node from module nodes
-                int randMagnetNode = Random.Range(0, newNodes.nodes.Count);
-                Transform newNode = newNodes.nodes[randMagnetNode];
+                int randMagnetNode = Random.Range(0, newModuleNodes.Nodes.Count);
+                Transform newNode = newModuleNodes.Nodes[randMagnetNode];
                 Debug.Log("Random Nodes chosen");
                 
                 //move, collision check, rotate stuff
                 
-                int j = 0;
+                
                 Debug.Log("Doing Move stuff");
-                while (j < 4)
+                
+                //rotate newMod to match orientation of newNode and oldNode
+                int p = 0;
+                while (p < 4)
                 {
-                    //move into place
-                    //move newMod in place, do collision check check
-                    Vector3 newPos = GetNewModualPosition(oldMod.position, oldNode.position, newMod.transform.position, newNode.position);
-                    newMod.transform.position = newPos;
-                    Debug.Log("new pos = " + newPos);
-                    yield return new WaitForFixedUpdate();
-                    //yield return new WaitForSeconds(.1f);
-                    
-                    
-                    //collision check
-                    Vector3 colliderSize = (newMod.GetComponent<Collider>().bounds.size);
-                    colliderSize /= 2;
-                    colliderSize -= new Vector3(.1f, .1f, .1f);
-                    Collider[] modColliders = Physics.OverlapBox(newMod.transform.position, colliderSize);
-                    Debug.Log("Collider size: " + colliderSize);
-                    Debug.Log("Collider pos: " + newMod.transform.position);
-                    //Physics.OverlapBoxNonAlloc(newMod.transform.position, (Vector3.one), modColliders)
-                    if (modColliders.Length > 1)
+                    float angle = Quaternion.Angle(newNode.rotation, oldNode.rotation);
+                    if (angle > 179)
+                    {
+                        Debug.Log("peices alligned before placing! angle = " + angle +
+                                  "\nnewNode Rotation = " + newNode.rotation.eulerAngles +
+                                  "\noldNode Rotation = " + oldNode.rotation.eulerAngles);
+                        break;
+                    }
+                    else
                     {
                         //rotate, try again
                         Vector3 currentRot = newMod.transform.rotation.eulerAngles;
@@ -98,38 +106,64 @@ public class SpawnModules : MonoBehaviour
                         currentRot.y = Mathf.Round(currentRot.y);
                         Quaternion rotQuat = Quaternion.Euler(currentRot);
                         newMod.transform.rotation = rotQuat;
-                        Utils.DebugLogArray(modColliders);
-                        Debug.Log("rotating");
                     }
-                    else
-                    {
-                        Debug.Log("no collision detected, " + j + " loops");
-                        break;
-                    }
-                    j++;
+                    p++;
                 }
+                
 
-                //if not rortated too much, add mod and nodes, else skip and get rid of it
-                if (j != 4)
+                //move newMod in place, do collision check check
+                Vector3 newPos = GetNewModualPosition(oldMod.position, oldNode.position, newMod.transform.position, newNode.position);
+                newMod.transform.position = newPos;
+                Debug.Log("new pos = " + newPos);
+                yield return new WaitForFixedUpdate();
+                //yield return new WaitForSeconds(.1f);
+                
+                
+                //collision check
+                Vector3 colliderSize = (newMod.GetComponent<Collider>().bounds.size);
+                colliderSize /= 2;
+                colliderSize -= new Vector3(.1f, .1f, .1f);
+                Collider[] modColliders = Physics.OverlapBox(newMod.transform.position, colliderSize, Quaternion.identity, roomLayer);
+                Debug.Log("Collider size: " + colliderSize);
+                Debug.Log("Collider pos: " + newMod.transform.position);
+                
+                //if colliding with something, don't add the piece, otherwise add the piece
+                if (modColliders.Length > 1)
                 {
+                    Debug.Log("couldn't fit it");
+                    DestroyImmediate(newMod);
+                }
+                else
+                {
+                    Debug.Log("no collision detected, placing module");
                     currentModules.Add(newMod);
 
-                    foreach (var node in newNodes.nodes)
+                    foreach (var node in newModuleNodes.Nodes)
                     {
                         Debug.Log("Adding new Node");
                         currentNodes.Add(node);
                     }
-                }
-                else
-                {
-                    Debug.Log(j + "loops, couldn't fit it");
-                    DestroyImmediate(newMod);
+                    
+                    doorNodes.Add(oldNode);
+                    currentNodes.Remove(oldNode);
+
+                    i++;
                 }
                
             }
             OpenNodeCheck();
         }
         
+        PlaceDoors();
+    }
+
+    private void PlaceDoors()
+    {
+        foreach (var node in doorNodes)
+        {
+            if(Random.Range(0f,1f) < .5f)
+                Instantiate(doorPrefab, node);
+        }
     }
 
     //returns the position a new modual should be placed at based on node positions
@@ -156,7 +190,7 @@ public class SpawnModules : MonoBehaviour
         foreach (var node in currentNodes)
         {
             //Collider[] colliders = new Collider[3];
-            Collider[] nodeColliders = Physics.OverlapSphere(node.position, .1f);
+            Collider[] nodeColliders = Physics.OverlapSphere(node.position, .1f, roomLayer);
             //Physics.OverlapSphereNonAlloc(node.position, .1f, colliders)
             if (nodeColliders.Length > 1)
             {
@@ -185,6 +219,7 @@ public class SpawnModules : MonoBehaviour
     public void Clear()
     {
         currentNodes.Clear();
+        doorNodes.Clear();
         
         foreach (var mod in currentModules)
         {
@@ -199,13 +234,20 @@ public class SpawnModules : MonoBehaviour
 [CustomEditor (typeof(SpawnModules))]
 public class SpawnModulesEditor : Editor {
     public override void OnInspectorGUI () {
-        SpawnModules training = (SpawnModules)target;
-        if(GUILayout.Button("Spawn"))
+        SpawnModules spawner = (SpawnModules)target;
+
+        if (Application.isPlaying)
         {
-            training.StartCoroutine(training.Spawn());
-        }
-        if(GUILayout.Button("Clear")){
-            training.Clear();
+           if(GUILayout.Button("Spawn"))
+           {
+               spawner.StartCoroutine(spawner.Spawn());
+           }
+            
+           if(GUILayout.Button("Clear")){
+               spawner.Clear();
+           }
+            
+           GUILayout.Label("Current Seed: " + spawner.internalSeed); 
         }
         DrawDefaultInspector ();
     }

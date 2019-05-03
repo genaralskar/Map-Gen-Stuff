@@ -8,10 +8,13 @@
       <e p="Assets" t="Include">
         <e p="demo.xml" t="Include" />
         <e p="GamblersDice.cs" t="Include" />
+        <e p="OpenDoorTEst.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Module Scripts" t="Include">
             <e p="HallwayCrawler.cs" t="Include" />
-            <e p="Nodes.cs" t="Include" />
+            <e p="ModuleNodes.cs" t="Include" />
+            <e p="PopulateNodes.cs" t="Include" />
+            <e p="SpawnModules.cs" t="Include" />
           </e>
           <e p="PieceFinder.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
@@ -19,7 +22,6 @@
             <e p="Utils.cs" t="Include" />
           </e>
         </e>
-        <e p="SpawnModules.cs" t="Include" />
         <e p="tiles.xml" t="Include" />
         <e p="TutorialInfo" t="Include">
           <e p="Scripts" t="Include">
