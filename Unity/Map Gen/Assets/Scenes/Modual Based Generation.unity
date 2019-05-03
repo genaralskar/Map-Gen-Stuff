@@ -589,11 +589,8 @@ MonoBehaviour:
     type: 3}
   roomContainer: {fileID: 359650475}
   spawnableModules:
-  - {fileID: 1004107871938053955, guid: 0ce929940a6d1ee409d0f2175833cb09, type: 3}
-  - {fileID: 7496503956618454587, guid: e772217057b15d548ba1b0fa4415c181, type: 3}
-  - {fileID: 7496503956618454587, guid: ae7ba839b5145604d9cf079f3600f553, type: 3}
-  - {fileID: 7496503956618454587, guid: fdb58a8d1f3d71f4883b95c2de49a6fd, type: 3}
-  maxIterations: 50
+  - {fileID: 4142185839014661175, guid: 92e736bdd06fdbb4a884c30f5dfc8d84, type: 3}
+  maxIterations: 10
   maxWidth: 10
   maxHeight: 10
   seed: 0
@@ -601,6 +598,7 @@ MonoBehaviour:
   roomLayer:
     serializedVersion: 2
     m_Bits: 512
+  moduleLayer: 9
   currentModules: []
   currentNodes: []
   doorNodes: []
@@ -887,7 +885,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4547db0ef3aee444cae6ed74eb8bfeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodesParent: {fileID: 0}
+  doorNodesParent: {fileID: 0}
+  wallNodesParent: {fileID: 0}
+  randomNodes: 0
+  minDoors: 1
+  maxDoors: 3
+  randomChance: 0
 --- !u!4 &5686072066611932426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5686072066611932426, guid: 92e736bdd06fdbb4a884c30f5dfc8d84,

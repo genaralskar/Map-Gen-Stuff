@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 8823074497768001188}
   - component: {fileID: 21121875770882113}
   - component: {fileID: 3305922697738352299}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Room 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,6 +280,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodesParent: {fileID: 7211513478173699977}
+  randomNodes: 0
+  nodesToChooseFrom: []
+  randomChance: 0
 --- !u!65 &3305922697738352299
 BoxCollider:
   m_ObjectHideFlags: 0

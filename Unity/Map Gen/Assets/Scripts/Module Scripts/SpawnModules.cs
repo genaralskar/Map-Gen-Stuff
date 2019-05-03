@@ -27,6 +27,7 @@ public class SpawnModules : MonoBehaviour
     public bool[,] takenSpots;
 
     public LayerMask roomLayer;
+    public int moduleLayer = 9;
     public List<GameObject> currentModules;
     public List<Transform> currentNodes;
 
@@ -51,12 +52,13 @@ public class SpawnModules : MonoBehaviour
             int randMod = Random.Range(0, spawnableModules.Count);
             GameObject newMod = Instantiate(spawnableModules[randMod], roomContainer);
             newMod.name = ("Room " + currentModules.Count);
+            newMod.layer = moduleLayer;
             ModuleNodes newModuleNodes = newMod.GetComponent<ModuleNodes>();
             
             if (currentModules.Count == 0)
             {
                 currentModules.Add(newMod);
-                foreach (var node in newModuleNodes.Nodes)
+                foreach (var node in newModuleNodes.DoorNodes)
                 {
                     currentNodes.Add(node);
                 }
@@ -77,8 +79,8 @@ public class SpawnModules : MonoBehaviour
                 
                 
                 //choose random node from module nodes
-                int randMagnetNode = Random.Range(0, newModuleNodes.Nodes.Count);
-                Transform newNode = newModuleNodes.Nodes[randMagnetNode];
+                int randMagnetNode = Random.Range(0, newModuleNodes.DoorNodes.Count);
+                Transform newNode = newModuleNodes.DoorNodes[randMagnetNode];
                 Debug.Log("Random Nodes chosen");
                 
                 //move, collision check, rotate stuff
@@ -138,7 +140,7 @@ public class SpawnModules : MonoBehaviour
                     Debug.Log("no collision detected, placing module");
                     currentModules.Add(newMod);
 
-                    foreach (var node in newModuleNodes.Nodes)
+                    foreach (var node in newModuleNodes.DoorNodes)
                     {
                         Debug.Log("Adding new Node");
                         currentNodes.Add(node);
@@ -146,6 +148,10 @@ public class SpawnModules : MonoBehaviour
                     
                     doorNodes.Add(oldNode);
                     currentNodes.Remove(oldNode);
+                    
+                    //doesnt work :c
+                    oldMod.gameObject.GetComponent<ModuleNodes>().WallNodes.Remove(oldNode);
+                    newMod.gameObject.GetComponent<ModuleNodes>().WallNodes.Remove(newNode);
 
                     i++;
                 }
@@ -155,6 +161,7 @@ public class SpawnModules : MonoBehaviour
         }
         
         PlaceDoors();
+        PopulateWalls.PopulateWallsAction?.Invoke();
     }
 
     private void PlaceDoors()

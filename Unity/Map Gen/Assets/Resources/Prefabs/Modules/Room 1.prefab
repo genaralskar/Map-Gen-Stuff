@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2276142902654676956}
   - component: {fileID: 7326417957332392249}
   - component: {fileID: 5190221853395736531}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Room 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4547db0ef3aee444cae6ed74eb8bfeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodesParent: {fileID: 140685981362360049}
+  doorNodesParent: {fileID: 140685981362360049}
+  wallNodesParent: {fileID: 1513725478859909381}
+  randomNodes: 0
+  minDoors: 1
+  maxDoors: 3
+  randomChance: 0
 --- !u!65 &5190221853395736531
 BoxCollider:
   m_ObjectHideFlags: 0

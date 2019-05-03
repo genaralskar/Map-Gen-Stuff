@@ -30,6 +30,36 @@ Transform:
   m_Father: {fileID: 7211513478173699977}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
+--- !u!1 &685781586537723302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4264434838803738854}
+  m_Layer: 0
+  m_Name: Wall Nodes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4264434838803738854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685781586537723302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8823074497768001188}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1051059954734538865
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +197,7 @@ Transform:
   - {fileID: 1613353149926430507}
   - {fileID: 1033568347275115359}
   m_Father: {fileID: 8823074497768001188}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4432663595433703880
 GameObject:
@@ -243,7 +273,7 @@ GameObject:
   - component: {fileID: 8823074497768001188}
   - component: {fileID: 21121875770882113}
   - component: {fileID: 3305922697738352299}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Room 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,6 +292,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7211513478173699977}
+  - {fileID: 4264434838803738854}
   - {fileID: 1694608557582655243}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -278,7 +309,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4547db0ef3aee444cae6ed74eb8bfeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodesParent: {fileID: 7211513478173699977}
+  doorNodesParent: {fileID: 7211513478173699977}
+  wallNodesParent: {fileID: 4264434838803738854}
+  randomNodes: 0
+  minDoors: 1
+  maxDoors: 3
+  randomChance: 0
 --- !u!65 &3305922697738352299
 BoxCollider:
   m_ObjectHideFlags: 0

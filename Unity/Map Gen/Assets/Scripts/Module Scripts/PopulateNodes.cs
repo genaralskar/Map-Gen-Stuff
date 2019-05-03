@@ -12,24 +12,22 @@ public class PopulateNodes : MonoBehaviour
 {
     public GameObject prefab;
     public Transform nodeParent;
-    private List<Transform> nodes;
+    
+    //[HideInInspector]
+    public List<Transform> nodes;
     [HideInInspector]
     public List<GameObject> currentGameObjects;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    public void Populate()
+    public virtual void Populate()
     {
-        GetNodes();
+        if(nodeParent != null)
+            GetNodes();
         
         foreach (var node in nodes)
         {
             GameObject newWall = Instantiate(prefab, node);
             currentGameObjects.Add(newWall);
+            print("spawning door");
         }
     }
 
