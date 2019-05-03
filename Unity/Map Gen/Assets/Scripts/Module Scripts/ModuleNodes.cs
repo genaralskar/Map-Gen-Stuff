@@ -28,7 +28,7 @@ public class ModuleNodes : MonoBehaviour
                 if(randomNodes)
                     GetRandomDoorNodes();
                 
-                Debug.Log("populating door nodes " + doorNodes.Count);
+                //Debug.Log("populating door nodes " + doorNodes.Count);
             }
 
             return doorNodes;
@@ -44,7 +44,7 @@ public class ModuleNodes : MonoBehaviour
             {
                 //Debug.Log("populating wallnodes");
                 wallNodes = GetNodes(wallNodesParent);
-                print(wallNodes.Count);
+                //Debug.Log(wallNodes.Count);
             }
 
             return wallNodes;
@@ -66,6 +66,7 @@ public class ModuleNodes : MonoBehaviour
 
     private void GetRandomDoorNodes()
     {
+        bool skip = false;
         while (doorNodes.Count < minDoors)
         {
             currentDoors = 0;
@@ -73,17 +74,25 @@ public class ModuleNodes : MonoBehaviour
             {
                 if (currentDoors >= maxDoors)
                     return;
-            
+
+                if (skip)
+                {
+                    skip = false;
+                    continue;   
+                }
+                
                 float rand = Random.Range(0f, 1f);
             
-                print("112 " + wallNodes.Count);
+
                 if (rand < randomChance)
                 {
                     doorNodes.Add(node);
 
                     currentDoors++;
+                    
+                    //skip an itteration to avoid doors next to each other
+                    skip = true;
                 }
-                print("113 " + wallNodes.Count);
             }
 
             //when adding to doorNodes, remove from wallNodes

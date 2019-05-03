@@ -33,6 +33,8 @@ public class SpawnModules : MonoBehaviour
 
     public List<Transform> doorNodes;
 
+    public List<Transform> connectingDoors;
+
     
     public IEnumerator Spawn()
     {
@@ -68,7 +70,7 @@ public class SpawnModules : MonoBehaviour
                 //check if there are any more nodes available
                 if (currentNodes.Count == 0)
                 {
-                    Debug.Log("No more nodes to use!");
+                    //Debug.Log("No more nodes to use!");
                     break;
                 }
                 
@@ -81,12 +83,12 @@ public class SpawnModules : MonoBehaviour
                 //choose random node from module nodes
                 int randMagnetNode = Random.Range(0, newModuleNodes.DoorNodes.Count);
                 Transform newNode = newModuleNodes.DoorNodes[randMagnetNode];
-                Debug.Log("Random Nodes chosen");
+                //Debug.Log("Random Nodes chosen");
                 
                 //move, collision check, rotate stuff
                 
                 
-                Debug.Log("Doing Move stuff");
+                //Debug.Log("Doing Move stuff");
                 
                 //rotate newMod to match orientation of newNode and oldNode
                 int p = 0;
@@ -95,9 +97,9 @@ public class SpawnModules : MonoBehaviour
                     float angle = Quaternion.Angle(newNode.rotation, oldNode.rotation);
                     if (angle > 179)
                     {
-                        Debug.Log("peices alligned before placing! angle = " + angle +
-                                  "\nnewNode Rotation = " + newNode.rotation.eulerAngles +
-                                  "\noldNode Rotation = " + oldNode.rotation.eulerAngles);
+                        //Debug.Log("peices alligned before placing! angle = " + angle +
+                        //          "\nnewNode Rotation = " + newNode.rotation.eulerAngles +
+                        //          "\noldNode Rotation = " + oldNode.rotation.eulerAngles);
                         break;
                     }
                     else
@@ -116,7 +118,7 @@ public class SpawnModules : MonoBehaviour
                 //move newMod in place, do collision check check
                 Vector3 newPos = GetNewModualPosition(oldMod.position, oldNode.position, newMod.transform.position, newNode.position);
                 newMod.transform.position = newPos;
-                Debug.Log("new pos = " + newPos);
+                //Debug.Log("new pos = " + newPos);
                 yield return new WaitForFixedUpdate();
                 //yield return new WaitForSeconds(.1f);
                 
@@ -126,30 +128,30 @@ public class SpawnModules : MonoBehaviour
                 colliderSize /= 2;
                 colliderSize -= new Vector3(.1f, .1f, .1f);
                 Collider[] modColliders = Physics.OverlapBox(newMod.transform.position, colliderSize, Quaternion.identity, roomLayer);
-                Debug.Log("Collider size: " + colliderSize);
-                Debug.Log("Collider pos: " + newMod.transform.position);
+                //Debug.Log("Collider size: " + colliderSize);
+                //Debug.Log("Collider pos: " + newMod.transform.position);
                 
                 //if colliding with something, don't add the piece, otherwise add the piece
                 if (modColliders.Length > 1)
                 {
-                    Debug.Log("couldn't fit it");
+                    //Debug.Log("couldn't fit it");
                     DestroyImmediate(newMod);
                 }
                 else
                 {
-                    Debug.Log("no collision detected, placing module");
+                    //Debug.Log("no collision detected, placing module");
                     currentModules.Add(newMod);
 
                     foreach (var node in newModuleNodes.DoorNodes)
                     {
-                        Debug.Log("Adding new Node");
+                        //Debug.Log("Adding new Node");
                         currentNodes.Add(node);
                     }
                     
                     doorNodes.Add(oldNode);
                     currentNodes.Remove(oldNode);
                     
-                    //doesnt work :c
+                    
                     oldMod.gameObject.GetComponent<ModuleNodes>().WallNodes.Remove(oldNode);
                     newMod.gameObject.GetComponent<ModuleNodes>().WallNodes.Remove(newNode);
 
@@ -157,6 +159,7 @@ public class SpawnModules : MonoBehaviour
                 }
                
             }
+            DoorNodeCheck(newModuleNodes);
             OpenNodeCheck();
         }
         
@@ -189,10 +192,48 @@ public class SpawnModules : MonoBehaviour
         return newPos;
     }
 
+    //checks if open door nodes are next to a wall that can be disabled
+    //if they are, remove the wall, if not, add node to wall nodes
+    private void DoorNodeCheck(ModuleNodes modToCheck)
+    {
+        foreach (var doorNode in modToCheck.DoorNodes)
+        {
+            if (doorNode == null) return;
+            
+            //check for overlap with another module
+            Collider[] coll = Physics.OverlapSphere(doorNode.position, .1f, roomLayer);
+            if (coll.Length > 1)
+            {
+                //get colliding ModuleNodes
+                ModuleNodes oldMod = coll[1].gameObject.GetComponent<ModuleNodes>();
+                if (oldMod == modToCheck)
+                {
+                    oldMod = coll[0].gameObject.GetComponent<ModuleNodes>();
+                }
+                
+                //if overlap, check for node in colliding module in same position as node
+                foreach (var wallNode in oldMod.WallNodes)
+                {
+                    if (Vector3.Distance(wallNode.position, doorNode.position) < .1f)
+                    {
+                        //remove that overlapping node from it's own wallNodes list
+                        if(oldMod.WallNodes.Contains(wallNode))
+                            oldMod.WallNodes.Remove(wallNode);
+                        
+                        //remove overlapping node from currentNodes
+                        if (currentNodes.Contains(wallNode))
+                            currentNodes.Remove(wallNode);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     //remove nodes that are next to a module
     private void OpenNodeCheck()
     {
-        Debug.Log("Open Node Check");
+        //Debug.Log("Open Node Check");
         List<Transform> nodesToRemove = new List<Transform>();
         foreach (var node in currentNodes)
         {
@@ -201,13 +242,9 @@ public class SpawnModules : MonoBehaviour
             //Physics.OverlapSphereNonAlloc(node.position, .1f, colliders)
             if (nodeColliders.Length > 1)
             {
-                Debug.Log(node.transform.parent.parent.name + " " + node.name);
-                print(node.position);
-                Utils.DebugLogArray(nodeColliders, "node colliders: ");
                 //node is colliding!!!!
                 nodesToRemove.Add(node);
             }
-            Debug.Log("============");
         }
 
         foreach (var node in nodesToRemove)
@@ -217,7 +254,7 @@ public class SpawnModules : MonoBehaviour
                 Debug.Log("Node is not in current node list!");
             }
             
-            Debug.Log("Removing Overlapping Node");
+            //Debug.Log("Removing Overlapping Node");
             currentNodes.Remove(node);
             node.gameObject.SetActive(false);
         }

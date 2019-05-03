@@ -20,7 +20,7 @@ public class PopulateWalls : PopulateNodes
     {
         nodes = modNodes.WallNodes;
         nodeParent = null;
-        print(nodes.Count);
+        //Debug.Log(nodes.Count);
         base.Populate();
     }
 }

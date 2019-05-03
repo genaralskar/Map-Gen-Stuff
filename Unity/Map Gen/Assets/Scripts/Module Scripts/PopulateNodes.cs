@@ -13,6 +13,7 @@ public class PopulateNodes : MonoBehaviour
     public GameObject prefab;
     public Transform nodeParent;
     
+    
     //[HideInInspector]
     public List<Transform> nodes;
     [HideInInspector]
@@ -27,7 +28,7 @@ public class PopulateNodes : MonoBehaviour
         {
             GameObject newWall = Instantiate(prefab, node);
             currentGameObjects.Add(newWall);
-            print("spawning door");
+            //Debug.Log("spawning door");
         }
     }
 
