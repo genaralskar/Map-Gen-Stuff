@@ -20,7 +20,7 @@ public class PopulateNodes : MonoBehaviour
     public List<GameObject> currentGameObjects;
 
     public virtual void Populate()
-    {
+    {   
         if(nodeParent != null)
             GetNodes();
         
@@ -28,7 +28,6 @@ public class PopulateNodes : MonoBehaviour
         {
             GameObject newWall = Instantiate(prefab, node);
             currentGameObjects.Add(newWall);
-            //Debug.Log("spawning door");
         }
     }
 

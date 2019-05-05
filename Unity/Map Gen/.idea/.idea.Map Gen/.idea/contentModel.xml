@@ -8,10 +8,22 @@
       <e p="Assets" t="Include">
         <e p="demo.xml" t="Include" />
         <e p="GamblersDice.cs" t="Include" />
+        <e p="LevelGenEvents.cs" t="Include" />
         <e p="MoveCamera.cs" t="Include" />
         <e p="OpenDoorTEst.cs" t="Include" />
+        <e p="PlayerAttacks.cs" t="Include" />
         <e p="PlayerController.cs" t="Include" />
         <e p="Scripts" t="Include">
+          <e p="Damage Stuff" t="Include">
+            <e p="EnemyHealth.cs" t="Include" />
+            <e p="Health.cs" t="Include" />
+            <e p="HitBox.cs" t="Include" />
+            <e p="Hurtbox.cs" t="Include" />
+            <e p="PlayerHealth.cs" t="Include" />
+          </e>
+          <e p="Editor" t="Include">
+            <e p="SetupRoom.cs" t="Include" />
+          </e>
           <e p="Module Scripts" t="Include">
             <e p="HallwayCrawler.cs" t="Include" />
             <e p="ModuleNodes.cs" t="Include" />
@@ -25,6 +37,7 @@
             <e p="Utils.cs" t="Include" />
           </e>
         </e>
+        <e p="TabMap.cs" t="Include" />
         <e p="tiles.xml" t="Include" />
         <e p="TutorialInfo" t="Include">
           <e p="Scripts" t="Include">

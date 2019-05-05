@@ -15,10 +15,10 @@ TagManager:
   - 
   - PostProcessing
   - Room Box
-  - 
-  - 
-  - 
-  - 
+  - Player Hitbox
+  - Player Hurtbox
+  - Enemy Hitbox
+  - Enemy Hurtbox
   - 
   - 
   - 

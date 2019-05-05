@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Reflection;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Events;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -13,6 +15,10 @@ using Vector3 = UnityEngine.Vector3;
 
 public class SpawnModules : MonoBehaviour
 {
+    public static UnityAction LevelBuildStart;
+    public static UnityAction LevelBuildEnd;
+    
+    
     public GameObject doorPrefab;
     public Transform roomContainer;
     public List<GameObject> spawnableModules;
@@ -20,6 +26,8 @@ public class SpawnModules : MonoBehaviour
     public int maxWidth = 10;
     public int maxHeight = 10;
     public int seed = 0;
+
+    public bool playOnStart;
     
     [HideInInspector]
     public int internalSeed;
@@ -33,11 +41,15 @@ public class SpawnModules : MonoBehaviour
 
     public List<Transform> doorNodes;
 
-    public List<Transform> connectingDoors;
+    private void Start()
+    {
+        if (playOnStart)
+            StartCoroutine(Spawn());
+    }
 
-    
     public IEnumerator Spawn()
     {
+        LevelBuildStart();
         Clear();
         
         //set random seed
@@ -162,9 +174,12 @@ public class SpawnModules : MonoBehaviour
             DoorNodeCheck(newModuleNodes);
             OpenNodeCheck();
         }
-        
+
+        //SetOpenDoorsToWalls();
         PlaceDoors();
         PopulateWalls.PopulateWallsAction?.Invoke();
+
+        LevelBuildEnd();
     }
 
     private void PlaceDoors()
@@ -173,6 +188,16 @@ public class SpawnModules : MonoBehaviour
         {
             if(Random.Range(0f,1f) < .5f)
                 Instantiate(doorPrefab, node);
+        }
+    }
+
+    private void SetOpenDoorsToWalls()
+    {
+        foreach (var node in currentNodes)
+        {
+            ModuleNodes newMod = node.parent.parent.gameObject.GetComponent<ModuleNodes>();
+            newMod.WallNodes.Add(node);
+            newMod.DoorNodes.Remove(node);
         }
     }
 

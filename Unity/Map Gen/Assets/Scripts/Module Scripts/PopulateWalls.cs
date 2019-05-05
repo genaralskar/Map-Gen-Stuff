@@ -23,4 +23,9 @@ public class PopulateWalls : PopulateNodes
         //Debug.Log(nodes.Count);
         base.Populate();
     }
+
+    private void OnDestroy()
+    {
+        PopulateWallsAction -= Populate;
+    }
 }

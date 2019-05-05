@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public Transform cameraFollowPoint;
 
     public float speed = 5f;
+    public float sprintMod = 1.5f;
+    public string sprintInput = "Sprint";
     public float jumpPower = 5f;
     public float lookSensitivity = 50f;
     public bool invertY = false;
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 mouseXY;
     private Vector3 moveDirection;
+    private bool isSprinting = false;
     
     // Start is called before the first frame update
     void Start()
@@ -52,6 +55,8 @@ public class PlayerController : MonoBehaviour
         moveDirection.z = Input.GetAxis("Vertical");
 
         moveDirection = transform.TransformDirection(moveDirection);
+
+        isSprinting = Input.GetButton(sprintInput);
     }
     
     private void RotateCamera()
@@ -83,7 +88,11 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        cc.Move(moveDirection * speed * Time.deltaTime);
+        Vector3 moveDir = moveDirection * speed * Time.deltaTime;
+        if (isSprinting)
+            moveDir *= sprintMod;
+        
+        cc.Move(moveDir);
     }
     
     
