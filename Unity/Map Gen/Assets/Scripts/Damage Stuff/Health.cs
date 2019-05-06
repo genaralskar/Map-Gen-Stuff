@@ -13,16 +13,34 @@ public class Health : MonoBehaviour
     
     public int maxHealth = 100;
     public int currentHealth;
-
+    
+    [Tooltip("How often the same damage source can cause damage")]
+    public float damagerCooldown = 0.1f;
+    
     public float NormalizedHealth => (float)currentHealth / (float)maxHealth;
+
+    private List<DamagerKeeper> dk;
+    private List<DamagerKeeper> dkToRemove;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        dk = new List<DamagerKeeper>();
+        dkToRemove = new List<DamagerKeeper>();
     }
 
-    public void AddHealth(int amount)
+    private void Update()
     {
+        DamageCooldown();
+    }
+
+    public void AddHealth(int amount, Collider hitBox)
+    {
+        //dont do damage stuff if the hitbox in the cooldown list
+        if (DamagerKeeperContainsCollider(hitBox)) return;
+        
+        AddColliderToCooldown(hitBox);
+        
         if (amount > 0)
         {
             OnHealthAdded(amount);
@@ -48,9 +66,44 @@ public class Health : MonoBehaviour
         OnHealthUpdate();
     }
 
-    public void RemoveHealth(int amount)
+    private void AddColliderToCooldown(Collider newCol)
     {
-        AddHealth(-amount);
+        DamagerKeeper newDk = new DamagerKeeper {hitBox = newCol, cooldownTimer = damagerCooldown};
+        dk.Add(newDk);
+    }
+
+    private void DamageCooldown()
+    {
+        foreach (var d in dk)
+        {
+            d.cooldownTimer -= Time.deltaTime;
+            if (d.cooldownTimer <= 0)
+            {
+                dkToRemove.Add(d);
+            }
+        }
+
+        foreach (var d in dkToRemove)
+        {
+            dk.Remove(d);
+        }
+        dkToRemove.Clear();
+    }
+
+    private bool DamagerKeeperContainsCollider(Collider coll)
+    {
+        foreach (var d in dk)
+        {
+            if (d.hitBox == coll) return true;
+        }
+
+        return false;
+    }
+    
+
+    public void RemoveHealth(int amount, Collider damager)
+    {
+        AddHealth(-amount, damager);
     }
 
     public virtual void OnHealthUpdate()
@@ -74,4 +127,10 @@ public class Health : MonoBehaviour
     }
     
     
+}
+
+public class DamagerKeeper
+{
+    public Collider hitBox;
+    public float cooldownTimer;
 }

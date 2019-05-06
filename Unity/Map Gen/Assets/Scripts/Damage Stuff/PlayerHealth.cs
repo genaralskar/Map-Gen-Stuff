@@ -9,6 +9,6 @@ public class PlayerHealth : Health
 
     public override void OnHealthUpdate()
     {
-        UpdateHealth(NormalizedHealth);
+        UpdateHealth?.Invoke(NormalizedHealth);
     }
 }

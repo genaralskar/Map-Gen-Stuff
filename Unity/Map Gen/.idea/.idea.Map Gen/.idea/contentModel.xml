@@ -7,6 +7,8 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="demo.xml" t="Include" />
+        <e p="EnemyAttacks.cs" t="Include" />
+        <e p="EnemyMovement.cs" t="Include" />
         <e p="GamblersDice.cs" t="Include" />
         <e p="LevelGenEvents.cs" t="Include" />
         <e p="MoveCamera.cs" t="Include" />
@@ -37,6 +39,7 @@
             <e p="Utils.cs" t="Include" />
           </e>
         </e>
+        <e p="Shield.cs" t="Include" />
         <e p="TabMap.cs" t="Include" />
         <e p="tiles.xml" t="Include" />
         <e p="TutorialInfo" t="Include">

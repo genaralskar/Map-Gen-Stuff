@@ -17,6 +17,7 @@ public class SpawnModules : MonoBehaviour
 {
     public static UnityAction LevelBuildStart;
     public static UnityAction LevelBuildEnd;
+    public static bool levelSpawned;
     
     
     public GameObject doorPrefab;
@@ -180,6 +181,7 @@ public class SpawnModules : MonoBehaviour
         PopulateWalls.PopulateWallsAction?.Invoke();
 
         LevelBuildEnd();
+        levelSpawned = true;
     }
 
     private void PlaceDoors()

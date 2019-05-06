@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    public static Transform playerTransform;
+    
     public MoveCamera moveCam;
     public Transform cameraFollowPoint;
 
@@ -20,12 +22,18 @@ public class PlayerController : MonoBehaviour
     private Vector2 mouseXY;
     private Vector3 moveDirection;
     private bool isSprinting = false;
-    
+
+    private void Awake()
+    {
+        playerTransform = transform;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         cc = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     // Update is called once per frame
