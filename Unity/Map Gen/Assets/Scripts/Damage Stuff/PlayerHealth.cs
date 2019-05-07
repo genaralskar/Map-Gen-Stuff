@@ -5,10 +5,15 @@ using UnityEngine.Events;
 
 public class PlayerHealth : Health
 {
-    public static UnityAction<float> UpdateHealth;
+    public new static UnityAction<int, int> UpdateHealth;
+
+    private void Start()
+    {
+        OnHealthUpdate();
+    }
 
     public override void OnHealthUpdate()
     {
-        UpdateHealth?.Invoke(NormalizedHealth);
+        UpdateHealth?.Invoke(currentHealth, maxHealth);
     }
 }

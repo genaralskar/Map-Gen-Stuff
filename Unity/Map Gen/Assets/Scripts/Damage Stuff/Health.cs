@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     public UnityAction Death;
     public UnityAction HealthAdded;
     public UnityAction HealthRemoved;
-    public UnityAction<float> UpdateHealth;
+    public UnityAction<int, int> UpdateHealth;
     
     public int maxHealth = 100;
     public int currentHealth;
@@ -22,7 +22,7 @@ public class Health : MonoBehaviour
     private List<DamagerKeeper> dk;
     private List<DamagerKeeper> dkToRemove;
 
-    private void Start()
+    private void Awake()
     {
         currentHealth = maxHealth;
         dk = new List<DamagerKeeper>();
@@ -39,7 +39,8 @@ public class Health : MonoBehaviour
         //dont do damage stuff if the hitbox in the cooldown list
         if (DamagerKeeperContainsCollider(hitBox)) return;
         
-        AddColliderToCooldown(hitBox);
+        if(hitBox != null)
+            AddColliderToCooldown(hitBox);
         
         if (amount > 0)
         {
@@ -57,12 +58,12 @@ public class Health : MonoBehaviour
 
         if (currentHealth < 0)
         {
-            OnDeath();
+            OnDeath(hitBox);
             Death?.Invoke();
         }
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         
-        UpdateHealth?.Invoke(NormalizedHealth);
+        UpdateHealth?.Invoke(currentHealth, maxHealth);
         OnHealthUpdate();
     }
 
@@ -99,6 +100,12 @@ public class Health : MonoBehaviour
 
         return false;
     }
+
+    public void IncreaseMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        UpdateHealth?.Invoke(currentHealth, maxHealth);
+    }
     
 
     public void RemoveHealth(int amount, Collider damager)
@@ -121,7 +128,7 @@ public class Health : MonoBehaviour
         
     }
 
-    public virtual void OnDeath()
+    public virtual void OnDeath(Collider hitbox)
     {
         
     }
