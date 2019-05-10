@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &8205796318775263749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578968404673749156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629cc46b98e2ed04aa5939cca1e1668a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 1578968404673749159}
+  damageNumbers: {fileID: 0}
+  cam: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!1001 &4362386548456474620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11,6 +27,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EXP Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 3003289319314056130, guid: 46a98dbf2aa82a34ba6c77016216eca0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956789806941937512, guid: 46a98dbf2aa82a34ba6c77016216eca0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982456171317962586, guid: 46a98dbf2aa82a34ba6c77016216eca0,
         type: 3}
@@ -67,16 +93,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3003289319314056130, guid: 46a98dbf2aa82a34ba6c77016216eca0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2956789806941937512, guid: 46a98dbf2aa82a34ba6c77016216eca0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8083289723219121049, guid: 46a98dbf2aa82a34ba6c77016216eca0,
         type: 3}
       propertyPath: m_IsActive
@@ -84,3 +100,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46a98dbf2aa82a34ba6c77016216eca0, type: 3}
+--- !u!1 &1578968404673749156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2982456171317962584, guid: 46a98dbf2aa82a34ba6c77016216eca0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4362386548456474620}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1578968404673749159 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2982456171317962587, guid: 46a98dbf2aa82a34ba6c77016216eca0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4362386548456474620}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578968404673749156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3096983e16afbfa4bad189afab02c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -19,6 +19,9 @@
         <e p="PlayerExpBar.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Damage Stuff" t="Include">
+            <e p="DamageNumber.cs" t="Include" />
+            <e p="DamageNumberSpawner.cs" t="Include" />
+            <e p="DamagerNumberSender.cs" t="Include" />
             <e p="EnemyHealth.cs" t="Include" />
             <e p="Health.cs" t="Include" />
             <e p="HitBox.cs" t="Include" />

@@ -7,8 +7,8 @@ using UnityEngine.Experimental.PlayerLoop;
 public class Health : MonoBehaviour
 {
     public UnityAction Death;
-    public UnityAction HealthAdded;
-    public UnityAction HealthRemoved;
+    public UnityAction<int> HealthAdded;
+    public UnityAction<int> HealthRemoved;
     public UnityAction<int, int> UpdateHealth;
     
     public int maxHealth = 100;
@@ -45,13 +45,13 @@ public class Health : MonoBehaviour
         if (amount > 0)
         {
             OnHealthAdded(amount);
-            HealthAdded?.Invoke();
+            HealthAdded?.Invoke(amount);
         }
 
         if (amount < 0)
         {
             OnHealthRemoved(amount);
-            HealthRemoved?.Invoke();
+            HealthRemoved?.Invoke(-amount);
         }
         
         currentHealth += amount;
