@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,6 +20,8 @@ public class Health : MonoBehaviour
     
     public float NormalizedHealth => (float)currentHealth / (float)maxHealth;
 
+    public enum DamageType {Neutral}
+    
     private List<DamagerKeeper> dk;
     private List<DamagerKeeper> dkToRemove;
 
@@ -34,35 +37,46 @@ public class Health : MonoBehaviour
         DamageCooldown();
     }
 
-    public void AddHealth(int amount, Collider hitBox)
+    public void AddHealth(int amount, Collider hitBox, DamageType damageType = DamageType.Neutral)
     {
         //dont do damage stuff if the hitbox in the cooldown list
         if (DamagerKeeperContainsCollider(hitBox)) return;
-        
-        if(hitBox != null)
+
+        if (hitBox != null)
+        {
             AddColliderToCooldown(hitBox);
+            hitBox.GetComponent<HitBox>().OnHit?.Invoke(this);
+        }
+            
         
+        //add health calls
         if (amount > 0)
         {
             OnHealthAdded(amount);
             HealthAdded?.Invoke(amount);
         }
 
+        //remove health calls
         if (amount < 0)
         {
             OnHealthRemoved(amount);
             HealthRemoved?.Invoke(-amount);
         }
         
+        //update health
         currentHealth += amount;
 
+        //death check
         if (currentHealth < 0)
         {
             OnDeath(hitBox);
             Death?.Invoke();
         }
+        
+        //clamp health
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         
+        //update health calls
         UpdateHealth?.Invoke(currentHealth, maxHealth);
         OnHealthUpdate();
     }
@@ -107,11 +121,11 @@ public class Health : MonoBehaviour
         UpdateHealth?.Invoke(currentHealth, maxHealth);
     }
     
-
-    public void RemoveHealth(int amount, Collider damager)
+    public void RemoveHealth(int amount, Collider damager, DamageType damageType = DamageType.Neutral)
     {
-        AddHealth(-amount, damager);
+        AddHealth(-amount, damager, damageType);
     }
+    
 
     public virtual void OnHealthUpdate()
     {

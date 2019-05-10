@@ -9,7 +9,7 @@ public class EnemyHealth : Health
 
     public override void OnHealthUpdate()
     {
-        Debug.Log("Owch! " + currentHealth);
+        //Debug.Log("Owch! " + currentHealth);
     }
     
     public override void OnDeath(Collider hitbox)
@@ -18,7 +18,7 @@ public class EnemyHealth : Health
         hitbox.transform.root.gameObject.GetComponent<Experience>().AddExperience(expAmount);
         
         //play animation probably
-        Debug.Log("Dead!");
+        //Debug.Log("Dead!");
         gameObject.SetActive(false);
     }
 }

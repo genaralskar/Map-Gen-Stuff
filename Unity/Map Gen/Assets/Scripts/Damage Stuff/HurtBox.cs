@@ -9,6 +9,8 @@ public class HurtBox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         HitBox hit = other.GetComponent<HitBox>();
-        health.RemoveHealth(hit.damage, other);
+        health.RemoveHealth(hit.damage, other, hit.damageType);
+        
+        //hit.OnHit?.Invoke(this);
     }
 }

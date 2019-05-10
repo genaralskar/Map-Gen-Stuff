@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1578968404673749159}
-  damageNumbers: {fileID: 0}
-  cam: {fileID: 0}
-  canvas: {fileID: 0}
 --- !u!1001 &4362386548456474620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37,6 +34,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956789806941937512, guid: 46a98dbf2aa82a34ba6c77016216eca0,
+        type: 3}
+      propertyPath: move
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956789806941937512, guid: 46a98dbf2aa82a34ba6c77016216eca0,
+        type: 3}
+      propertyPath: turn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956789806941937512, guid: 46a98dbf2aa82a34ba6c77016216eca0,
+        type: 3}
+      propertyPath: additionalMovementDamper
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956789806941937512, guid: 46a98dbf2aa82a34ba6c77016216eca0,
+        type: 3}
+      propertyPath: rotate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956789806941937512, guid: 46a98dbf2aa82a34ba6c77016216eca0,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2982456171317962586, guid: 46a98dbf2aa82a34ba6c77016216eca0,
         type: 3}

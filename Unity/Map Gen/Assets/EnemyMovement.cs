@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(CharacterController))]
 public class EnemyMovement : MonoBehaviour
@@ -14,13 +17,20 @@ public class EnemyMovement : MonoBehaviour
     public float rotateSpeed = 50f;
     public float stoppingDistance = 1f;
 
+    [Range(0, 1)] public float additionalMovementDamper = 0.8f;
+
+    public bool move = true;
+    public bool rotate = true;
+
     private CharacterController cc;
     private Vector3 directionTowardsPlayer;
     private float distanceFromPlayer;
+    private Vector3 additionalMovement;
     
     void Awake()
     {
         cc = GetComponent<CharacterController>();
+        additionalMovement = Vector3.zero;
     }
 
     private void Start()
@@ -41,16 +51,16 @@ public class EnemyMovement : MonoBehaviour
         
         if (PlayerInMoveRange(distanceFromPlayer))
         {
-            Rotate();
-            if (!InStoppingDistance())
-            {
-                Debug.Log(distanceFromPlayer);
-                //if hit player, move towards player
-                //rotate towards player as well
-                Move();
-            }
+            //Debug.Log(distanceFromPlayer);
+            //if hit player, move towards player
+            //rotate towards player as well
+            Move();
             
+            if(rotate)
+                Rotate();
         }
+        
+        AdditionaMovementCooldown();
         
     }
 
@@ -79,6 +89,31 @@ public class EnemyMovement : MonoBehaviour
 
     public void Move()
     {
-        cc.Move(directionTowardsPlayer.normalized * moveSpeed * Time.deltaTime);
+        Vector3 newMove = Vector3.zero;
+        
+        if(move && !InStoppingDistance())
+            newMove += directionTowardsPlayer.normalized * moveSpeed;
+        
+        newMove += additionalMovement;
+        Debug.Log(newMove);
+        cc.Move(newMove * Time.deltaTime);
+    }
+
+    public void Knockback(Vector3 direction)
+    {
+        Debug.Log("Adding Knockback!");
+        additionalMovement += direction;
+        Debug.Log(additionalMovement);
+    }
+
+    public void AdditionaMovementCooldown()
+    {
+        if (additionalMovement.magnitude <= .01f)
+        {
+            additionalMovement = Vector3.zero;
+            return;
+        }
+
+        additionalMovement *= additionalMovementDamper;
     }
 }

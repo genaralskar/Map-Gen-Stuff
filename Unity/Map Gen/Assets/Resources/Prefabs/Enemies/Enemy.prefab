@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
+  damageType: 0
 --- !u!1 &2134368440381183798
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +267,7 @@ MonoBehaviour:
   maxHealth: 20
   currentHealth: 0
   damagerCooldown: 0.1
+  expAmount: 10
 --- !u!114 &3003289319314056130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,9 +321,12 @@ MonoBehaviour:
   attackRangeLayers:
     serializedVersion: 2
     m_Bits: 2048
-  moveSpeed: 3
+  moveSpeed: 2
   rotateSpeed: 50
   stoppingDistance: 2.3
+  additionalMovementDamper: 0.9
+  move: 1
+  rotate: 1
 --- !u!1 &2982456171711224338
 GameObject:
   m_ObjectHideFlags: 0
