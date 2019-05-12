@@ -161,8 +161,8 @@ public class SpawnModules : MonoBehaviour
                         currentNodes.Add(node);
                     }
                     
-                    doorNodes.Add(oldNode);
-                    currentNodes.Remove(oldNode);
+                    doorNodes.Add(newNode);
+                    currentNodes.Remove(newNode);
                     
                     
                     oldMod.gameObject.GetComponent<ModuleNodes>().WallNodes.Remove(oldNode);

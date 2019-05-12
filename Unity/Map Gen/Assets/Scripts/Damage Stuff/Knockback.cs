@@ -16,12 +16,7 @@ public class Knockback : MonoBehaviour
 
     private void OnHitHandler(Health enemyHealth)
     {
-        EnemyMovement enemyMove = enemyHealth.GetComponent<EnemyMovement>();
-        if (enemyMove != null)
-        {
-            Vector3 knockbackDirection = transform.forward * amount;
-            enemyMove.Knockback(knockbackDirection);
-        }
+        enemyHealth.KnockedBack?.Invoke(this);
     }
 
     private void OnEnable()

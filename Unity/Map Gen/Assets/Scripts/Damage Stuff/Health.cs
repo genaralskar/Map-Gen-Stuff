@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
     public UnityAction<int> HealthAdded;
     public UnityAction<int> HealthRemoved;
     public UnityAction<int, int> UpdateHealth;
+    public UnityAction<Knockback> KnockedBack;
     
     public int maxHealth = 100;
     public int currentHealth;
@@ -39,6 +40,7 @@ public class Health : MonoBehaviour
 
     public void AddHealth(int amount, Collider hitBox, DamageType damageType = DamageType.Neutral)
     {
+        Debug.Log("adding health" + amount);
         //dont do damage stuff if the hitbox in the cooldown list
         if (DamagerKeeperContainsCollider(hitBox)) return;
 
@@ -124,6 +126,12 @@ public class Health : MonoBehaviour
     public void RemoveHealth(int amount, Collider damager, DamageType damageType = DamageType.Neutral)
     {
         AddHealth(-amount, damager, damageType);
+    }
+
+    public void RemoveHealth(HitBox hitBox)
+    {
+        Collider hitBoxCollider = hitBox.GetComponent<Collider>();
+        AddHealth(-hitBox.damage, hitBoxCollider, hitBox.damageType);
     }
     
 

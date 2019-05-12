@@ -8,6 +8,9 @@ using Vector3 = UnityEngine.Vector3;
 [RequireComponent(typeof(CharacterController))]
 public class EnemyMovement : MonoBehaviour
 {
+    [Tooltip("Used for knockback")]
+    public Health health;
+    
     public Transform player;
     public float range = 10f;
     public LayerMask playerInRangeLayers;
@@ -31,6 +34,10 @@ public class EnemyMovement : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         additionalMovement = Vector3.zero;
+        if (health != null)
+        {
+            health.KnockedBack += Knockback;
+        }
     }
 
     private void Start()
@@ -95,15 +102,21 @@ public class EnemyMovement : MonoBehaviour
             newMove += directionTowardsPlayer.normalized * moveSpeed;
         
         newMove += additionalMovement;
-        Debug.Log(newMove);
+        //Debug.Log(newMove);
         cc.Move(newMove * Time.deltaTime);
     }
 
+    public void Knockback(Knockback source)
+    {
+        //Debug.Log("Adding Knockback!");
+        Vector3 direction = source.transform.forward * source.amount;
+        additionalMovement += direction;
+        //Debug.Log(additionalMovement);
+    }
+    
     public void Knockback(Vector3 direction)
     {
-        Debug.Log("Adding Knockback!");
         additionalMovement += direction;
-        Debug.Log(additionalMovement);
     }
 
     public void AdditionaMovementCooldown()
