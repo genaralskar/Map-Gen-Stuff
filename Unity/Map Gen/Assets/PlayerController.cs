@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerTransform = transform;
+        if (moveCam == null)
+        {
+            moveCam = Camera.main.GetComponent<MoveCamera>();
+        }
     }
 
     // Start is called before the first frame update
@@ -99,7 +103,8 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = moveDirection * speed * Time.deltaTime;
         if (isSprinting)
             moveDir *= sprintMod;
-        
+
+        moveDir.y = -10f;
         cc.Move(moveDir);
     }
     

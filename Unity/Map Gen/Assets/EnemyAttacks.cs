@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyMovement))]
+[RequireComponent(typeof(EnemyHealth))]
 public class EnemyAttacks : MonoBehaviour
 {
     public Animator rArmAnimator;
@@ -9,26 +11,29 @@ public class EnemyAttacks : MonoBehaviour
     public float attackRange = 1f;
     
     private EnemyMovement enemyMove;
+    private EnemyHealth health;
 
     private void Awake()
     {
         enemyMove = GetComponent<EnemyMovement>();
+        health = GetComponent<EnemyHealth>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(Attacking());
+        health.KnockedBack += HitShield;
     }
 
     private void Update()
     {
         if (!SpawnModules.levelSpawned) return;
         
-        if (enemyMove.PlayerInAttackRange(attackRange))
-        {
-            Attack();
-        }
+        rArmAnimator.SetBool("Attack 0", enemyMove.PlayerInAttackRange(attackRange));
+//        if (enemyMove.PlayerInAttackRange(attackRange))
+//        {
+//            Attack();
+//        }
     }
 
     private IEnumerator Attacking()
@@ -39,6 +44,16 @@ public class EnemyAttacks : MonoBehaviour
             yield return waiter;
             Attack();
         }
+    }
+
+    public void HitShield()
+    {
+        rArmAnimator.SetTrigger("Shield Hit");
+    }
+
+    private void HitShield(Vector3 force)
+    {
+        HitShield();
     }
 
     public void Attack()

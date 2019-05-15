@@ -1,13 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Reflection;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 using Quaternion = UnityEngine.Quaternion;
-using Vector3 = UnityEngine.Vector3;
 
 /// <summary>
 /// Used to spawn rooms (modules) at connecting node points
@@ -17,6 +13,10 @@ public class SpawnModules : MonoBehaviour
 {
     public static UnityAction LevelBuildStart;
     public static UnityAction LevelBuildEnd;
+    public static UnityAction<List<GameObject>> SpawnChest;
+    public static UnityAction SpawnProps;
+    public static UnityAction SpawnEnemies;
+    
     public static bool levelSpawned;
     
     
@@ -45,20 +45,34 @@ public class SpawnModules : MonoBehaviour
     private void Start()
     {
         if (playOnStart)
-            StartCoroutine(Spawn());
+            SpawnRooms();
     }
 
-    public IEnumerator Spawn()
+    public void SpawnRooms()
     {
-        LevelBuildStart();
+        StartCoroutine(Spawn());
+    }
+
+    private IEnumerator Spawn()
+    {
+        
+        LevelBuildStart?.Invoke();
+        //Debug.Log("level build start");
         Clear();
+        
+        currentModules = new List<GameObject>();
+        currentNodes = new List<Transform>();
+        doorNodes = new List<Transform>();
+        
+        yield return new WaitForFixedUpdate();
+        yield return new WaitForFixedUpdate();
         
         //set random seed
         internalSeed = seed != 0 ? seed : Random.Range(0, 1000000);
         Random.InitState(internalSeed);
         
         
-        
+        //Debug.Log("maxIterations = " + maxIterations);
         for (int i = 0; i < maxIterations;)
         {
             //OpenNodeCheck();
@@ -70,8 +84,13 @@ public class SpawnModules : MonoBehaviour
             newMod.layer = moduleLayer;
             ModuleNodes newModuleNodes = newMod.GetComponent<ModuleNodes>();
             
+            //if this is the first piece
             if (currentModules.Count == 0)
             {
+                //don't spawn enemies
+                SpawnEnemies spawner = newMod.GetComponent<SpawnEnemies>();
+                spawner.amountRange = new Vector2(0, 0);
+                
                 currentModules.Add(newMod);
                 foreach (var node in newModuleNodes.DoorNodes)
                 {
@@ -180,8 +199,14 @@ public class SpawnModules : MonoBehaviour
         PlaceDoors();
         PopulateWalls.PopulateWallsAction?.Invoke();
 
-        LevelBuildEnd();
+        LevelBuildEnd?.Invoke();
         levelSpawned = true;
+        
+        //Debug.Log("current modules = " + currentModules.Count);
+        SpawnChest?.Invoke(currentModules);
+
+        SpawnProps?.Invoke();
+        SpawnEnemies?.Invoke();
     }
 
     private void PlaceDoors()
@@ -289,12 +314,13 @@ public class SpawnModules : MonoBehaviour
     
     public void Clear()
     {
+        levelSpawned = false;
         currentNodes.Clear();
         doorNodes.Clear();
         
         foreach (var mod in currentModules)
         {
-            DestroyImmediate(mod);
+            Destroy(mod);
         }
         
         currentModules.Clear();
@@ -311,7 +337,7 @@ public class SpawnModulesEditor : Editor {
         {
            if(GUILayout.Button("Spawn"))
            {
-               spawner.StartCoroutine(spawner.Spawn());
+               spawner.SpawnRooms();
            }
             
            if(GUILayout.Button("Clear")){

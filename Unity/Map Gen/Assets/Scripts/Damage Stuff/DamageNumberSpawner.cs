@@ -6,11 +6,14 @@ using UnityEngine.Events;
 
 public class DamageNumberSpawner : MonoBehaviour
 {
-    public static UnityAction<int, Transform> spawnDamagerNumbers;
+    public static UnityAction<int, Transform, Health.DamageType> spawnDamagerNumbers;
 
     public Camera cam;
     public Transform canvas;
     public GameObject damageNumbers;
+
+    public Color32 neutralDamageColor;
+    public Color32 critDamageColor;
 
     private void Awake()
     {
@@ -28,8 +31,10 @@ public class DamageNumberSpawner : MonoBehaviour
     }
 
 
-    public void SpawnNumbers(int amount, Transform obj)
+    public void SpawnNumbers(int amount, Transform obj, Health.DamageType damageType = Health.DamageType.Neutral)
     {
+        //Debug.Log("spawning numbers");
+        
         //spawn damage numbers, parent to canvas
         GameObject newNumbers = Instantiate(damageNumbers, canvas);
         
@@ -45,7 +50,23 @@ public class DamageNumberSpawner : MonoBehaviour
         //set values on dn
         dn.cam = cam;
         dn.parent = obj;
-        
-        print("numbers spawned");
+        dn.color = GetColor(damageType);
+    }
+
+    private Color32 GetColor(Health.DamageType damageType)
+    {
+        switch (damageType)
+        {
+            case Health.DamageType.Neutral:
+                return neutralDamageColor;
+            
+            case Health.DamageType.Crit:
+                Debug.Log("Crit color!");
+                return critDamageColor;
+            
+            default:
+                return Color.white;
+                
+        }
     }
 }

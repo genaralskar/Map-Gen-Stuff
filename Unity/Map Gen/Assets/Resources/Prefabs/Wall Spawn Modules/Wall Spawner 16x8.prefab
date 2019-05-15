@@ -1043,6 +1043,16 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8486017433195446253, guid: bd6cb49ba30b40c4596ac09fa80ccd2a,
+        type: 3}
+      propertyPath: spawnBox.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486017433195446253, guid: bd6cb49ba30b40c4596ac09fa80ccd2a,
+        type: 3}
+      propertyPath: spawnBox.z
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd6cb49ba30b40c4596ac09fa80ccd2a, type: 3}
 --- !u!4 &369012869511242630 stripped

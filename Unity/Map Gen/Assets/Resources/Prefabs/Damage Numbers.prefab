@@ -172,6 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
   cam: {fileID: 0}
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
   lifeTime: 1
   objectOffset: {x: 0, y: 2, z: 0}
   velocity: {x: 200, y: 400}

@@ -19,6 +19,14 @@
         <e p="PlayerController.cs" t="Include" />
         <e p="PlayerExpBar.cs" t="Include" />
         <e p="Scripts" t="Include">
+          <e p="Audio" t="Include">
+            <e p="HurtboxSound.cs" t="Include" />
+          </e>
+          <e p="Collectables" t="Include">
+            <e p="KeyCheck.cs" t="Include" />
+            <e p="PickupKey.cs" t="Include" />
+            <e p="SpawnChest.cs" t="Include" />
+          </e>
           <e p="Damage Stuff" t="Include">
             <e p="DamageNumber.cs" t="Include" />
             <e p="DamageNumberSpawner.cs" t="Include" />
@@ -28,6 +36,7 @@
             <e p="HitBox.cs" t="Include" />
             <e p="HurtBox.cs" t="Include" />
             <e p="Knockback.cs" t="Include" />
+            <e p="ObjectKnockback.cs" t="Include" />
             <e p="PlayerHealth.cs" t="Include" />
           </e>
           <e p="Editor" t="Include">
@@ -45,7 +54,20 @@
             <e p="SpawnModules.cs" t="Include" />
           </e>
           <e p="PieceFinder.cs" t="Include" />
+          <e p="Progression Stuff" t="Include">
+            <e p="AdvanceMapLevel.cs" t="Include" />
+            <e p="LevelManager.cs" t="Include" />
+          </e>
           <e p="SimpleCameraController.cs" t="Include" />
+          <e p="SO Values" t="Include">
+            <e p="FloatValue.cs" t="Include" />
+          </e>
+          <e p="Spawning Stuff" t="Include">
+            <e p="PrefabGroup.cs" t="Include" />
+            <e p="SpawnEnemies.cs" t="Include" />
+            <e p="SpawnObjects.cs" t="Include" />
+            <e p="SpawnProps.cs" t="Include" />
+          </e>
           <e p="Static" t="Include">
             <e p="Utils.cs" t="Include" />
           </e>

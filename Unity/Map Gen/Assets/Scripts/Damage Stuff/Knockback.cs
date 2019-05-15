@@ -14,9 +14,9 @@ public class Knockback : MonoBehaviour
         hitBox = GetComponent<HitBox>();
     }
 
-    private void OnHitHandler(Health enemyHealth)
+    protected virtual void OnHitHandler(Health enemyHealth)
     {
-        enemyHealth.KnockedBack?.Invoke(this);
+        enemyHealth.KnockedBack?.Invoke(transform.forward * amount);
     }
 
     private void OnEnable()

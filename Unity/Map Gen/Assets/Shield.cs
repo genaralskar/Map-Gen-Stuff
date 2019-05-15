@@ -11,6 +11,9 @@ public class Shield : MonoBehaviour
     {
         //set shield hit
         playerAttacks.shieldHit = true;
+
+        other.transform.root.gameObject.GetComponent<EnemyAttacks>()?.HitShield();
+        
         health.AddHealth(0, other);
     }
 }

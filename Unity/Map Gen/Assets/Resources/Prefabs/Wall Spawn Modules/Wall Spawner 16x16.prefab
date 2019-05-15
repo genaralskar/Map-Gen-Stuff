@@ -73,6 +73,8 @@ GameObject:
   - component: {fileID: 163346969467420163}
   - component: {fileID: 8041050811297769441}
   - component: {fileID: 3186306281007757004}
+  - component: {fileID: 463190936524033490}
+  - component: {fileID: 7024385009280071044}
   m_Layer: 0
   m_Name: Wall Spawner 16x16
   m_TagString: Untagged
@@ -144,6 +146,48 @@ MonoBehaviour:
   nodeParent: {fileID: 0}
   nodes: []
   currentGameObjects: []
+--- !u!114 &463190936524033490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539608348300989491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91c084f795560e499d47cd404e35f86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabGroup: {fileID: 0}
+  amountRange: {x: 0, y: 3}
+  parent: {fileID: 0}
+  autoSetup: 1
+  doCollisionCheck: 0
+  spawnBox: {x: 15, y: 4, z: 15}
+  spawnOffset: {x: 0, y: 2, z: 0}
+  minimumSpacing: 2
+  testEnemy: {fileID: 0}
+--- !u!114 &7024385009280071044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539608348300989491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3f15f7ffffbe2439d130021d0884c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabGroup: {fileID: 11400000, guid: 67a35638ce42d9742985c8eff1687d41, type: 2}
+  amountRange: {x: 0, y: 3}
+  parent: {fileID: 7016773032056315417}
+  autoSetup: 1
+  doCollisionCheck: 0
+  spawnBox: {x: 15, y: 4, z: 15}
+  spawnOffset: {x: 0, y: 2, z: 0}
+  minimumSpacing: 2
+  testEnemy: {fileID: 0}
 --- !u!1 &1890576845211167510
 GameObject:
   m_ObjectHideFlags: 0

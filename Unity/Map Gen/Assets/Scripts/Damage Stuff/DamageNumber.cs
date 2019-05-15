@@ -9,6 +9,8 @@ public class DamageNumber : MonoBehaviour
     public Transform parent;
     [HideInInspector]
     public Camera cam;
+    [HideInInspector]
+    public Color32 color = Color.white;
     
     
     public float lifeTime = 1f;
@@ -23,6 +25,8 @@ public class DamageNumber : MonoBehaviour
     private float yVelocity;
     private float xVelocity;
     private Vector2 currentOffset;
+
+    private float smoothVel = 5f;
     
     private void Awake()
     {
@@ -30,6 +34,11 @@ public class DamageNumber : MonoBehaviour
         lifeTimer = lifeTime;
         yVelocity = velocity.y;
         xVelocity = Random.Range(-velocity.x, velocity.x);
+    }
+
+    private void Start()
+    {
+        TMP.color = color;
     }
 
     private void LateUpdate()
@@ -41,7 +50,7 @@ public class DamageNumber : MonoBehaviour
         }
 
         Move();
-        //FadeColor();
+        FadeColor();
     }
 
     private void Move()
@@ -60,8 +69,24 @@ public class DamageNumber : MonoBehaviour
 
     private void FadeColor()
     {
-        Color tempColor = TMP.color;
-        tempColor.a -= lifeTimer / lifeTime;
-        TMP.color = tempColor;
+        Color32 tempColor = TMP.color;
+        Color32 tempColorFade = tempColor;
+        byte newA = (byte) Mathf.Lerp(255, 0, GetExponent(1-(lifeTimer / lifeTime), 3));
+        tempColorFade.a = newA;
+        //Color32 newColor = Color32.Lerp(tempColorFade, tempColor, lifeTimer / lifeTime);
+        
+        //Mathf.Lerp(255, 0, lifetim)
+        //tempColor.a -= lifeTimer / lifeTime;
+//        
+//        Color32 tempColor32 = tempColor;
+        //Debug.Log(tempColorFade);
+        
+        TMP.color = tempColorFade;
+    }
+
+    private float GetExponent(float input, float power)
+    {
+        input = Mathf.Pow(input, power);
+        return Mathf.Lerp(0, 1, input);
     }
 }

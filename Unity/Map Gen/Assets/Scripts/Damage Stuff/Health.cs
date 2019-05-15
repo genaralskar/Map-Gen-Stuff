@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Experimental.PlayerLoop;
+using Random = UnityEngine.Random;
 
 public class Health : MonoBehaviour
 {
     public UnityAction Death;
     public UnityAction<int> HealthAdded;
-    public UnityAction<int> HealthRemoved;
+    public UnityAction<int, DamageType> HealthRemoved;
     public UnityAction<int, int> UpdateHealth;
-    public UnityAction<Knockback> KnockedBack;
+    public UnityAction<Vector3> KnockedBack;
     
     public int maxHealth = 100;
     public int currentHealth;
@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
     
     public float NormalizedHealth => (float)currentHealth / (float)maxHealth;
 
-    public enum DamageType {Neutral}
+    public enum DamageType {Neutral, Crit}
     
     private List<DamagerKeeper> dk;
     private List<DamagerKeeper> dkToRemove;
@@ -40,7 +40,7 @@ public class Health : MonoBehaviour
 
     public void AddHealth(int amount, Collider hitBox, DamageType damageType = DamageType.Neutral)
     {
-        Debug.Log("adding health" + amount);
+        //Debug.Log("adding health" + amount);
         //dont do damage stuff if the hitbox in the cooldown list
         if (DamagerKeeperContainsCollider(hitBox)) return;
 
@@ -62,7 +62,7 @@ public class Health : MonoBehaviour
         if (amount < 0)
         {
             OnHealthRemoved(amount);
-            HealthRemoved?.Invoke(-amount);
+            HealthRemoved?.Invoke(-amount, damageType);
         }
         
         //update health
@@ -130,8 +130,19 @@ public class Health : MonoBehaviour
 
     public void RemoveHealth(HitBox hitBox)
     {
+        int damage = hitBox.damage;
+        DamageType dt = hitBox.damageType;
+        
+        //crit check
+        if (dt == DamageType.Neutral && Random.Range(0f, 1f) < hitBox.critChance)
+        {
+            damage *= 2;
+            dt = DamageType.Crit;
+            Debug.Log("Crit!");
+        }
+        
         Collider hitBoxCollider = hitBox.GetComponent<Collider>();
-        AddHealth(-hitBox.damage, hitBoxCollider, hitBox.damageType);
+        AddHealth(-damage, hitBoxCollider, dt);
     }
     
 
