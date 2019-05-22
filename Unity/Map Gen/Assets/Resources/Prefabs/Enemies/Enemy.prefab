@@ -136,7 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab09b2be0f0a797469572e5a7c7a149e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  baseDamage: {fileID: 11400000, guid: 89e5f3099d0df0d4bbad097306163fa5, type: 2}
+  damageMultiplier: {fileID: 11400000, guid: 5270eddadc4a2224893d873fb0865127, type: 2}
   damageType: 0
   critChance: 0
 --- !u!1 &2134368440381183798
@@ -285,6 +286,8 @@ MonoBehaviour:
   rArmAnimator: {fileID: 3395614258043243318}
   attackInterval: 2
   attackRange: 2.5
+  attackSpeedMultiplier: {fileID: 11400000, guid: 3d0326ef683ffc848b279b05f8131570,
+    type: 2}
 --- !u!143 &5082117816782736137
 CharacterController:
   m_ObjectHideFlags: 0

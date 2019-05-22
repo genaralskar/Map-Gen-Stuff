@@ -183,6 +183,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   keyCount: 0
+  currentKeysValue: {fileID: 11400000, guid: 162622b0aba1d3847a9a4b78cad7e141, type: 2}
 --- !u!114 &6007274114428817885
 MonoBehaviour:
   m_ObjectHideFlags: 0

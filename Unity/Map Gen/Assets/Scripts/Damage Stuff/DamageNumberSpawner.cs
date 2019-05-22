@@ -61,7 +61,7 @@ public class DamageNumberSpawner : MonoBehaviour
                 return neutralDamageColor;
             
             case Health.DamageType.Crit:
-                Debug.Log("Crit color!");
+                //Debug.Log("Crit color!");
                 return critDamageColor;
             
             default:

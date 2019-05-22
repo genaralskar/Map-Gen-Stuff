@@ -11,6 +11,8 @@ public class KeyCheck : MonoBehaviour
     public int keyCount;
     private int currentKeys;
 
+    public IntValue currentKeysValue;
+
     private void OnTriggerEnter(Collider other)
     {
         if (currentKeys >= keyCount)
@@ -26,5 +28,6 @@ public class KeyCheck : MonoBehaviour
     public void AddKey()
     {
         currentKeys++;
+        currentKeysValue.value = currentKeys;
     }
 }

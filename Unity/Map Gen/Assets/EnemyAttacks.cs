@@ -9,6 +9,8 @@ public class EnemyAttacks : MonoBehaviour
     public Animator rArmAnimator;
     public float attackInterval = 2f;
     public float attackRange = 1f;
+
+    public FloatValue attackSpeedMultiplier;
     
     private EnemyMovement enemyMove;
     private EnemyHealth health;
@@ -23,6 +25,8 @@ public class EnemyAttacks : MonoBehaviour
     void Start()
     {
         health.KnockedBack += HitShield;
+
+        rArmAnimator.playbackTime = attackSpeedMultiplier;
     }
 
     private void Update()

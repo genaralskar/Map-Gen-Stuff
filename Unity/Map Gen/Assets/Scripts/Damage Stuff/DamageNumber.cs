@@ -55,6 +55,8 @@ public class DamageNumber : MonoBehaviour
 
     private void Move()
     {
+        if (parent == null) return;
+        
         transform.position = cam.WorldToScreenPoint(parent.position + objectOffset);
         currentOffset.x += xVelocity * Time.deltaTime;
         currentOffset.y += yVelocity * Time.deltaTime;

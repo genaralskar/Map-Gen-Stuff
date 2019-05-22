@@ -69,7 +69,7 @@ public class Health : MonoBehaviour
         currentHealth += amount;
 
         //death check
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
             OnDeath(hitBox);
             Death?.Invoke();
@@ -130,7 +130,7 @@ public class Health : MonoBehaviour
 
     public void RemoveHealth(HitBox hitBox)
     {
-        int damage = hitBox.damage;
+        int damage = hitBox.Damage;
         DamageType dt = hitBox.damageType;
         
         //crit check
@@ -138,7 +138,7 @@ public class Health : MonoBehaviour
         {
             damage *= 2;
             dt = DamageType.Crit;
-            Debug.Log("Crit!");
+            //Debug.Log("Crit!");
         }
         
         Collider hitBoxCollider = hitBox.GetComponent<Collider>();

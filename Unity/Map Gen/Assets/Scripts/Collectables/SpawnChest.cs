@@ -5,8 +5,13 @@ using UnityEngine;
 public class SpawnChest : MonoBehaviour
 {
     public int numKeys;
+
+    
     public GameObject chest;
     public GameObject key;
+    
+    public IntValue keyCountValue;
+    public IntValue currentKeysValue;
     
     private List<Transform> spawnLocations;
     
@@ -45,6 +50,8 @@ public class SpawnChest : MonoBehaviour
         GameObject newChest = Instantiate(chest, locations[0]);
         KeyCheck kc = newChest.GetComponent<KeyCheck>();
         kc.keyCount = numKeys;
+        keyCountValue.value = numKeys;
+        currentKeysValue.value = 0;
         
         locations.RemoveAt(0);
 

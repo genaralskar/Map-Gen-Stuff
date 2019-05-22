@@ -199,7 +199,7 @@ public class SpawnModules : MonoBehaviour
         PlaceDoors();
         PopulateWalls.PopulateWallsAction?.Invoke();
 
-        LevelBuildEnd?.Invoke();
+        //LevelBuildEnd?.Invoke();
         levelSpawned = true;
         
         //Debug.Log("current modules = " + currentModules.Count);
@@ -207,6 +207,8 @@ public class SpawnModules : MonoBehaviour
 
         SpawnProps?.Invoke();
         SpawnEnemies?.Invoke();
+        
+        LevelBuildEnd?.Invoke();
     }
 
     private void PlaceDoors()

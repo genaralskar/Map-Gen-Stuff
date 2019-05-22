@@ -11,13 +11,3 @@ public class FloatValue : ScriptableObject
     }
 }
 
-[CreateAssetMenu(menuName = "Values/int")]
-public class IntValue : ScriptableObject
-{
-    public int value;
-
-    public static implicit operator int(IntValue value)
-    {
-        return value.value;
-    }
-}

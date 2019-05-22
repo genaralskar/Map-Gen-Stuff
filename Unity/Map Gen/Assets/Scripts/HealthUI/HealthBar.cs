@@ -25,6 +25,7 @@ public class HealthBar : MonoBehaviour
 
     public void UpdateFill(float amount)
     {
+        if (healthBar == null) return;
         healthBar.fillAmount = amount;
     }
 
