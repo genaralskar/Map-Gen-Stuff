@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\genar\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_Map Gen.-1658247934.00" t="ExcludeRecursive" />
-    <e p="E:\GIT\Map Gen Stuff\Unity\Map Gen" t="IncludeRecursive">
+    <e p="C:\Users\genar\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_Map Gen.-1252347255.00" t="ExcludeRecursive" />
+    <e p="D:\GIT\Map-Gen-Stuff\Unity\Map Gen" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -20,6 +20,7 @@
         <e p="PlayerDeath.cs" t="Include" />
         <e p="PlayerExpBar.cs" t="Include" />
         <e p="Scripts" t="Include">
+          <e p="AddGoldTest.cs" t="Include" />
           <e p="Audio" t="Include">
             <e p="HurtboxSound.cs" t="Include" />
           </e>
@@ -41,6 +42,7 @@
             <e p="ObjectKnockback.cs" t="Include" />
             <e p="PlayerHealth.cs" t="Include" />
           </e>
+          <e p="DontDestroyOnLoad.cs" t="Include" />
           <e p="Editor" t="Include">
             <e p="SetupRoom.cs" t="Include" />
           </e>
@@ -54,6 +56,9 @@
             <e p="PopulateNodes.cs" t="Include" />
             <e p="PopulateWalls.cs" t="Include" />
             <e p="SpawnModules.cs" t="Include" />
+          </e>
+          <e p="Movement" t="Include">
+            <e p="Movement.cs" t="Include" />
           </e>
           <e p="PieceFinder.cs" t="Include" />
           <e p="Progression Stuff" t="Include">
@@ -75,8 +80,10 @@
             <e p="SpawnProps.cs" t="Include" />
           </e>
           <e p="Static" t="Include">
+            <e p="Inventory.cs" t="Include" />
             <e p="Utils.cs" t="Include" />
           </e>
+          <e p="UpdateGoldCount.cs" t="Include" />
         </e>
         <e p="Shield.cs" t="Include" />
         <e p="TabMap.cs" t="Include" />

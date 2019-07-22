@@ -4840,21 +4840,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8714346767039880635, guid: e341373822f41424f9c9188ec68faa57,
-        type: 3}
-      propertyPath: deathScreen
-      value: 
-      objectReference: {fileID: 1189412122}
-    - target: {fileID: 8714346767039880635, guid: e341373822f41424f9c9188ec68faa57,
-        type: 3}
-      propertyPath: sceneManager
-      value: 
-      objectReference: {fileID: 2049729846}
-    - target: {fileID: 8714346767039880635, guid: e341373822f41424f9c9188ec68faa57,
-        type: 3}
-      propertyPath: deathAnimation
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3729916769534663446, guid: e341373822f41424f9c9188ec68faa57,
         type: 3}
       propertyPath: m_Name
@@ -4914,6 +4899,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714346767039880635, guid: e341373822f41424f9c9188ec68faa57,
+        type: 3}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 1189412122}
+    - target: {fileID: 8714346767039880635, guid: e341373822f41424f9c9188ec68faa57,
+        type: 3}
+      propertyPath: sceneManager
+      value: 
+      objectReference: {fileID: 2049729846}
+    - target: {fileID: 8714346767039880635, guid: e341373822f41424f9c9188ec68faa57,
+        type: 3}
+      propertyPath: deathAnimation
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3729916769534663433, guid: e341373822f41424f9c9188ec68faa57,
         type: 3}
