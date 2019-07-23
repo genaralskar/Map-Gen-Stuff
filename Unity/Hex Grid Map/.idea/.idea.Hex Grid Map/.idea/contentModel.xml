@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\genar\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_Hex Grid Map.813363081.00" t="ExcludeRecursive" />
+    <e p="D:\GIT\Map-Gen-Stuff\Unity\Hex Grid Map" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Editor" t="Include">
+          <e p="HexCoordinateDrawer.cs" t="Include" />
+        </e>
+        <e p="HexCell.cs" t="Include" />
+        <e p="HexCoordinates.cs" t="Include" />
+        <e p="HexGrid.cs" t="Include" />
+        <e p="HexMapEditor.cs" t="Include" />
+        <e p="HexMesh.cs" t="Include" />
+        <e p="HexMetrics.cs" t="Include" />
+        <e p="VertexColors.shader" t="Include" />
+      </e>
+      <e p="Hex Grid Map.sln" t="IncludeFlat" />
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
